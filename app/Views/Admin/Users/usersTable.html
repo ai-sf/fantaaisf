@@ -1,0 +1,41 @@
+{% for user in users %}
+      <tr :class="{'table-active': checked.includes('{{user.id}}')}" id="tablerow-{{user.id}}">
+        <td>
+            <input class="form-check-input user-checkbox" type="checkbox" name="user-checkbox[]" value="{{user.id}}" form="user-select" id="checkbox-{{user.id}}" @change="selectAll = false; $refs.master.indeterminate = checked.some(Boolean) ? true : false"  x-model="checked" >
+        </td>
+        <td>{{user.id}}</td>
+        <td>{{user.name}}</td>
+
+        <td>{{user.surname}}</td>
+        <td class="text-center">{% if user.level == 1 %} Utente {% elsif user.level == 2 %} FantaCISF {% else %} Admin {% endif %}</td>
+
+
+        <td class="text-end">
+          <a hx-get="{{"admin/users/sendMail/" | append: user.id | url}}" href="{{"admin/users/sendMail/" | append: user.id | url}}" hx-swap="none" class="btn btn-outline-success btn-sm me-1"><i class="bi bi-envelope-at-fill"></i> </a>
+
+          <a href="{{"admin/users/edit/" | append: user.id | url}}" class="btn btn-outline-primary btn-sm"><i class="bi bi-pencil"></i></a>
+
+          <a
+            class="btn btn-outline-danger btn-sm ms-4 {% if user.id == logged_user.id %} disabled {% endif %}"
+            {% if user.id != logged_user.id %} hx-get="{{"admin/users/delete/" | append: user.id | url}}"
+            hx-target="closest tbody" hx-swap="innerHtml"{% endif %}><i class="bi bi-trash3"></i></a>
+
+        </td>
+
+      </tr>
+      {% endfor %}
+      {% if num_users == 0 %}
+      <tr>
+        <td colspan="9">
+          <div class="text-center fst-italic">Nessun risultato</div>
+
+        </td>
+      </tr>
+      {% endif %}
+
+      {% if message %}
+      <div id="toast-body" hx-swap-oob="true" class="toast-body">{{message}}</div>
+      {% endif %}
+    {% if is_update %}
+      <th class="fst-italic fw-normal text-end" hx-swap-oob="true" id="results-number">{{num_users}} risultat{% if num_users == 1%}o{% else %}i{% endif %}</th>
+    {% endif %}

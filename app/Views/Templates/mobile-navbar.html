@@ -1,0 +1,30 @@
+
+    <nav class="navbar navbar-light bg-light shadow mb-5">
+      <div class="container-fluid">
+        <a class="navbar-brand mx-auto" href="#">
+<img class="nav-image" src="{{"img/gipe.png" | url}}">
+<span class="fs-3 fw-bold text-primary">FantaGIPE</span>
+
+
+        </a>
+
+        <a class="navbar-toggler" data-bs-toggle="offcanvas" href="#sidebar" style="position:absolute; right: 10px">
+          <span class="navbar-toggler-icon"></span>
+        </a>
+      </div>
+    </nav>
+
+
+    <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="sidebar" aria-labelledby="sidebarLabel">
+      <div class="offcanvas-header mt-2">
+        <a href="{{ "" | url }}" class="nav-name d-flex align-items-center link-dark text-decoration-none">
+          <img class="nav-image" src="{{"img/gipe-white.png" | url}}">
+          <span class="fs-3 fw-bold text-white">FantaGIPE</span>
+
+        </a>
+        <button type="button" class="btn-close btn-close-white me-2" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        {% include "Templates/sidenav"%}
+      </div>
+    </div>

@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+  <head>
+    {% include "Templates/head", title: title %}
+    <script defer src="{{"js/site.js" | url}} "></script>
+  </head>
+  <body>
+
+    <nav class="navbar shadow navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand mx-auto" href="#">
+        <img class="nav-image" src="{{"img/gipe.png" | url}}">
+        <span class="fs-3 fw-bold text-primary">FantaGIPE</span>
+
+        </a>
+      </div>
+    </nav>
+      {% block content %}
+      Content
+    {% endblock %}
+
+
+
+  </body>
+</html>

@@ -1,0 +1,14 @@
+@import "_main.scss";
+
+.member-card,
+.member-card .badge {
+  transition: background 0.3s ease;
+}
+
+.bg-yellow{
+  background-color: #fcd303 !important;
+}
+
+.text-yellow {
+  color: #fcd303 !important;
+}

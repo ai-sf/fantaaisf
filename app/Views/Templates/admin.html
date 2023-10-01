@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+  <head>
+    {% include "Templates/head", title: title %}
+    <link rel="stylesheet" href="{{ "css/admin.css" | url}}">
+
+    <script src="{{"js/admin.js" | url }}"></script>
+  </head>
+  <body >
+
+      <div class="d-block d-lg-none">
+        {% include "Templates/mobile-navbar" %}
+      </div>
+
+
+
+        <div class="sidenav-container fixed" id="sidenav" hx-swap="morph:innerHTML">
+          <div class="d-none d-lg-flex flex-column flex-shrink-0 p-3 h-100 shadow-lg bg-dark ">
+            <a href="{{ "admin" | url }}" class="nav-name d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+<img class="nav-image" src="{{"img/gipe-white.png" | url}}">
+<span class="fs-3 fw-bold text-white">FantaGIPE</span>
+
+
+            </a>
+            <hr/>
+        {% include "Templates/sidenav" %}
+      </div>
+
+      </div>
+
+
+        <main role="main" class="pt-3 px-lg-4" id="main" >
+
+                  {% block content %}
+                  {% endblock %}
+
+</main>
+
+
+    {% include "Templates/toast" %}
+
+  </body>
+</html>
+
+

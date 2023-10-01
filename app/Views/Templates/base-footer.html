@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+  <head>
+    <script defer src="{{"js/site.js" | url}} "></script>
+
+    {% include "Templates/head", title: title %}
+  </head>
+  <body>
+
+   {% include "Templates/mobile-navbar" %}
+
+    <main class="min-vh-100">
+      {% block content %}
+      Content
+    {% endblock %}
+    </main>
+
+
+
+  <footer class="bg-dark text-light py-3 mt-5">
+    <div class="container text-center">
+      <div>
+        Welcome, <span class="fw-bold"> {{ logged_user.name }} {{logged_user.surname}} </span>
+      </div>
+      <div>
+        <a href="{{"logout" | url }}" class="btn btn-outline-light btn-sm mt-2">Logout</a>
+      </div>
+    </div>
+  </footer>
+  </body>
+</html>

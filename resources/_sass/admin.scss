@@ -1,0 +1,32 @@
+@import "_main.scss";
+
+.sidenav-container{
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  width: 240px;
+}
+
+
+@media (min-width: 992px) {
+main{
+  margin-left: 260px;
+}
+}
+
+
+
+#central-card{
+  transition: all 0.8s ease;
+}
+
+
+.progress .progress-bar{
+  transition: width 0.3s ease;
+}
+
+#sidenav{
+  transition: all 0.3s ease
+}

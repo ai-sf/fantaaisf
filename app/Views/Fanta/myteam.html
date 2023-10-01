@@ -1,0 +1,25 @@
+
+{% if logged_user.fanta_team  != "" %}
+
+<form>
+
+
+<h2 class="text-center mt-5 mb-3">Organizing Committee</h2>
+
+
+
+{% for member in OC %}
+{% include "Fanta/memberCard" %}
+{% endfor %}
+
+
+</form>
+
+
+
+{% endif %}
+
+
+{% if is_update %}
+  {% include "Fanta/teamNameForm"%}
+{% endif %}
