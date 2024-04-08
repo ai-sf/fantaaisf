@@ -14,7 +14,7 @@ class User extends Model
     #[CharField] protected $name;
     #[CharField] protected $surname;
     #[CharField(max_length: 256)] protected $password;
-    #[CharField] protected $email;
+    #[CharField(max_length: 64)] protected $email;
     #[CharField] protected $hash;
     #[NumberField] protected $level;
     #[NumberField] protected $active;

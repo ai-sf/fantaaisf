@@ -36,6 +36,7 @@ return [
   "admin/fanta/setBonus/<int:member_id>/<int:bonus_id>" => [AdminController::class, "setBonus"],
   "admin/fanta/removeBonus/<int:member_id>/<int:bonus_id>" => [AdminController::class, "removeBonus"],
   "admin/fanta/startGame" => [AdminController::class, "startGame"],
+  "admin/fanta/showPoints" => [AdminController::class, "showPoints"],
 
   "fanta" => [FantaController::class, "index"],
   "fanta/toggle/<int:id>" => [FantaController::class, "toggle"],

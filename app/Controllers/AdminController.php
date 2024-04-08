@@ -189,13 +189,13 @@ class AdminController extends BaseController
         $config = Application::getEmailConfig();
         $mail = new Mailer();
 
-        $subject = 'Credenziali sistema di voto AGA 2023';
+        $subject = 'Welcome to FantaGIPE!';
         $body = $this->render("Admin/loginEmail", ["name" => $user->name, "username" => $user->email, "password" => $password]);//sprintf("Username: %s <br/>Password: %s", $user->email, $password);
 
         if ($mail->send($user->email, $subject, $body)) {
             $message = "Email inviata correttamente";
         } else {
-            $message = "Errore di invio";
+            $message = $mail->error;//Errore di invio";
         }
         return $this->render(
             "Admin/toaster",
@@ -240,7 +240,7 @@ class AdminController extends BaseController
 
         foreach($allowed as $filter) {
             if(isset($_POST[$filter]) && $_POST[$filter] != "") {
-                $filters[$filter."__startswith"] = $_POST[$filter];
+                $filters[$filter . "__startswith"] = $_POST[$filter];
             }
         }
         if(count($filters) > 0) {
@@ -284,16 +284,17 @@ class AdminController extends BaseController
         foreach($users as $user) {
             $standings[] = [
                 "id" => $user->id,
-                "name" => $user->name." ".$user->surname,
+                "name" => $user->name . " " . $user->surname,
                 "team_name" => $user->fanta_team,
                 "points" => (new FantaController())->computePointsUser($user),
                 "team" => FantaTeam::filter(user: $user)->do()
             ];
         }
+        $show_points = FantaSettings::get(name:"show_points");
 
         usort($standings, array(FantaController::class, "cmp"));
         return $this->render("Admin/Fanta/league", ["has_started" => $settings->value, "users" => $standings,
-        "num_teams" => $users->count()]);
+        "num_teams" => $users->count(), "show_points" => $show_points->value]);
     }
 
     #[LoginRequired(2)]
@@ -379,7 +380,20 @@ class AdminController extends BaseController
         );
     }
 
+    #[LoginRequired(3)]
+    public function showPoints() {
+       $setting = FantaSettings::get(name: "show_points");
+        $setting->value = array_key_exists("show_points", $_POST) ? 1 : 0;
+        $setting->save();
 
+        $text = $setting->value ? "mostrati" : "nascosti";
+
+        return $this->render(
+            "Admin/toaster",
+            ["message" => "Punti $text!"],
+            headers: ['HX-Trigger' => 'showToast']
+        );
+    }
 
 
 }

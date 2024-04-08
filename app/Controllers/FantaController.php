@@ -72,7 +72,7 @@ class FantaController extends BaseController
                 echo "cancello";
                 $user->fanta_budget += $price;
                 if(($user->fanta_captain instanceof FantaMember)  && ($user->fanta_captain->id == $id)) {
-                    $user->fanta_captain = NULL;
+                    $user->fanta_captain = null;
                 }
                 $user->save();
 
@@ -81,7 +81,7 @@ class FantaController extends BaseController
                     $teamAssociation = FantaTeam::new(user: $user, teamMember: $member);
                     $teamAssociation->save();
                     $user->fanta_budget -= $price;
-                    if(!$user->fanta_captain){
+                    if(!$user->fanta_captain) {
                         $user->fanta_captain = $member;
                     }
                     $user->save();
@@ -164,6 +164,7 @@ class FantaController extends BaseController
                 "id" => $user->id,
                 "name" => $user->name." ".$user->surname,
                 "team_name" => $user->fanta_team,
+                "captain" => $user->fanta_captain->id,
                 "points" => $points,
                 "team" => FantaTeam::filter(user: $user)->do(),
                 "position" => 0
@@ -191,8 +192,9 @@ class FantaController extends BaseController
         }
 
         $setting = FantaSettings::get(name:"has_started");
+        $points = FantaSettings::get(name: "show_points");
         return $this->render("Fanta/league", ["users" => $standings,
-        "num_teams" => $users->count(), "has_started" => $setting->value]);
+        "num_teams" => $users->count(), "has_started" => $setting->value, "show_points" => $points->value]);
     }
 
 
@@ -202,7 +204,8 @@ class FantaController extends BaseController
         $team = FantaTeam::filter(user: $user);
         $points = 0;
         foreach($team as $member) {
-            $multiplier = $member == $user->fanta_captain ? 2 : 1;
+
+            $multiplier = $member->teamMember == $user->fanta_captain ? 2 : 1;
             $points += $multiplier * $this->computePointsMember($member->teamMember);
         }
         return $points;

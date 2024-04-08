@@ -1,11 +1,17 @@
 {% assign title = "Login" %}
-{% extends "Templates/base" %}
+
+{% extends "Templates/blank" %}
 
 {% block content %}
-<div class="container-fluid" >
+<main style="position:absolute; top:0px; bottom:0px; left:0px; right:0px; z-index:-1;  background-size: cover; background-position: center; background-image: url({{"img/background.png" | url}});">
+
+
+
+
+<div class="container-fluid" style="margin-top: 10vh;" >
   <div class="row">
     <div class="col col-12 col-md-6 col-lg-4 mx-auto mt-5" >
-      <div class="card shadow-lg w-100">
+      <div class="card shadow-lg w-100" style="border:none;">
         <div class="card-header bg-primary text-light">
           <h3 class="text-center">Login</h3>
         </div>
@@ -16,5 +22,8 @@
     </div>
   </div>
 </div>
+<div style="filter: drop-shadow(5px 5px 11px #00000055); z-index:999; background-size: contain; background-repeat: repeat-x; background-position: center bottom; position: absolute; bottom: 0px; left: 0px; right:0px; height: 30vh; background-image: url({{"img/waves.png" | url}})"></div>
+
+</main>
 
 {% endblock %}

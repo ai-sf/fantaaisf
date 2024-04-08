@@ -4,10 +4,11 @@
       {% assign on_page = el.link | url%}
         <li class="nav-item">
           {% assign sublink = el.link | sublink: page %}
+
           <a
             href="{{el.link | url }}"
             class="nav-link text-white mb-1 mt-3 mt-lg-2
-              {% if sublink %} active mb-2 {% endif %}
+              {% if sublink and el.link != base_link %} active mb-2 {% endif %}
             "
             aria-current="page"
             {% if el.target %} target="{{el.target}}" {% endif %}

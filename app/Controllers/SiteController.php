@@ -42,7 +42,7 @@ class SiteController extends BaseController
             $authenticator = new UserAuthenticator();
             if (!$authenticator->login($post["email"], $post["password"])) {
                 return $this->render(
-                    "Site/login_form",
+                    "Site/loginForm",
                     [
                       "login_invalid" => true,
                       "login_message" => "Wrong email and/or password"

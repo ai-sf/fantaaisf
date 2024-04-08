@@ -3,5 +3,17 @@
 {% extends "Templates/base-footer" %}
 
 {% block content %}
-{% include "Fanta/leagueTeams" %}
+{% if show_points == 1%}
+  {% include "Fanta/leagueTeams" %}
+{% else %}
+<div class="row">
+<div class="card col-12 col-lg-6 mx-auto shadow">
+	<div class="card-body text-center fs-4">
+		The results are hidden!
+	</div>
+</div>
+
+</div>
+
+{% endif %}
 {% endblock %}
